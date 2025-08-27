@@ -1,4 +1,4 @@
-import z from "zod";
+import { z } from "@hono/zod-openapi";
 
 export const subscriptionSchema = z.object({ 
   id: z.number().int().optional(),
@@ -18,6 +18,6 @@ export const subscriptionSchema = z.object({
   })
   .transform((val) => new Date(val)),
   userId: z.number().int().positive()
-})
+});
 
 export type Subscription = z.infer<typeof subscriptionSchema>;

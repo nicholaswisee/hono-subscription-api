@@ -6,9 +6,19 @@ import { authRoute } from "./routes/auth.route";
 
 const app = new OpenAPIHono();
 
+// Routing
 app.route("/api/users", userRoute);
 app.route("/api/auth", authRoute);
 app.route("/api/subscription", subscriptionRoute);
+
+app.onError((err, c) => {
+  console.log(err);
+
+  return c.json({
+    error: true,
+    message: err.message || "Internal Server Error",
+  }, 500);
+});
 
 // OpenAPI Documentation
 app.doc("/doc", {

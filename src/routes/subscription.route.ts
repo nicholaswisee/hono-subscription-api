@@ -1,5 +1,6 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { subscriptionSchema } from "../schema/subscription.schema";
+import { errorSchema } from "../schema/error.schema";
 
 export const subscriptionRoute = new OpenAPIHono();
 
@@ -20,6 +21,22 @@ const getSubscriptions = createRoute({
         }
       }
     },
+    404: {
+      description: "No Subscriptions found",
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        }
+      }
+    },
+    500: {
+      description: "Internal server error",
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        }
+      }
+    }
   }
 });
 
@@ -48,6 +65,22 @@ const getSubscriptionById = createRoute({
         }
       }
     },
+    404: {
+      description: "Subscription not found",
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        }
+      }
+    },
+    500: {
+      description: "Internal server error",
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        }
+      }
+    }
   }
 });
 
@@ -68,14 +101,30 @@ const createSubscription = createRoute({
     }),
   },
   responses: {
-    200: {
-      description: "Get a subscription by ID",
+    201: {
+      description: "Created a new subscription",
       content: {
         'application/json': {
           schema: subscriptionSchema,
         }
       }
     },
+    400: {
+      description: "Invalid request",
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        }
+      }
+    },
+    500: {
+      description: "Internal server error",
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        }
+      }
+    }
   }
 });
 
@@ -106,7 +155,20 @@ const getUserSubscriptions = createRoute({
       }
     },
     404: {
-      description: "User not found",
+      description: "User not found or no subscriptions",
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        }
+      }
+    },
+    500: {
+      description: "Internal server error",
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        }
+      }
     }
   }
 });
