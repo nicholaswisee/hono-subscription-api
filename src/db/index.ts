@@ -13,6 +13,7 @@ export const db = drizzle(pool, {
     ...userSchema,
     ...subscriptionSchema,
   },
+  logger: true,
 });
 
 export type Database = typeof db;

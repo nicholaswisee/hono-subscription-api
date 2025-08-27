@@ -1,6 +1,7 @@
 import z from "zod";
 
 export const subscriptionSchema = z.object({ 
+  id: z.number().int().optional(),
   name: z.string().trim().min(2).max(100),
   price: z.number().min(0),
   currency: z.enum(["USD", "EUR", "IDR"]).default("USD"),
