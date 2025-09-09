@@ -2,7 +2,7 @@ import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { subscriptionSchema } from "../schema/subscription.schema";
 import { errorSchema } from "../schema/error.schema";
 
-export const subscriptionRoute = new OpenAPIHono();
+export const subscriptionRouter = new OpenAPIHono();
 
 // GET /subscription
 const getSubscriptions = createRoute({

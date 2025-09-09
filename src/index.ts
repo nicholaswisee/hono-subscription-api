@@ -1,16 +1,13 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
-import { userRoute } from "./routes/user.route";
 import { swaggerUI } from "@hono/swagger-ui";
-import { subscriptionRoute } from "./routes/subscription.route";
-import { authRoute } from "./routes/auth.route";
+import { apiRouter } from "./controller/router";
 
 const app = new OpenAPIHono();
 
-// Routing
-app.route("/api/users", userRoute);
-app.route("/api/auth", authRoute);
-app.route("/api/subscription", subscriptionRoute);
+// Main app router
+app.route("/api", apiRouter);
 
+// Error handling
 app.onError((err, c) => {
   console.log(err);
 

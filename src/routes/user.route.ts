@@ -1,7 +1,7 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { userSchema } from "../schema/user.schema";
 
-export const userRoute = new OpenAPIHono();
+export const userRouter = new OpenAPIHono();
 
 // GET /users
 const getUsers = createRoute({

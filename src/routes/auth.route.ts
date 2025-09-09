@@ -1,8 +1,7 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { userSchema } from "../schema/user.schema";
 
-
-export const authRoute = new OpenAPIHono();
+export const authRouter = new OpenAPIHono();
 
 const signUp = createRoute({
   method: "post",
